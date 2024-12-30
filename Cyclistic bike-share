@@ -1,0 +1,54 @@
+--Dataset: Cyclistic bike-share from BigQuery
+--Source: https://divvy-tripdata.s3.amazonaws.com/index.html
+--Queried using: Bigqueries
+
+#union the data set from months to year
+SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202301`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202302`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202303`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202304`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202305`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202306`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202307`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202308`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202309`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202310`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202311`
+ UNION ALL
+ SELECT 
+  *
+ FROM `casestudy-000001.2023_divvy_tripdata.202312`
+
+#
