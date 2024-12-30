@@ -1,54 +1,104 @@
---Dataset: Cyclistic bike-share from BigQuery
+--Dataset: Cyclistic bike-share from amazonaws
 --Source: https://divvy-tripdata.s3.amazonaws.com/index.html
 --Queried using: Bigqueries
 
-#union the data set from months to year
-SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202301`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202302`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202303`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202304`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202305`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202306`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202307`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202308`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202309`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202310`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202311`
- UNION ALL
- SELECT 
-  *
- FROM `casestudy-000001.2023_divvy_tripdata.202312`
+## union the data set from months to year
+2023_total = """
+                  SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202301`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202302`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202303`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202304`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202305`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202306`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202307`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202308`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202309`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202310`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202311`
+                   UNION ALL
+                   SELECT 
+                    *
+                   FROM `casestudy-000001.2023_divvy_tripdata.202312`
+                   """
 
-#
+## remove null value and dublicate in dataset
+2023_trips_clean =  """
+                   ### create data temporary table without null data in list
+                   WITH trip_data AS (
+                   SELECT
+                     *
+                   FROM `casestudy-000001.2023_divvy_tripdata.2023_total`
+                   WHERE
+                     ride_id is not null and
+                     rideable_type is not null and
+                     started_at is not null and
+                     ended_at is not null and
+                     start_station_name is not null and
+                     start_station_id is not null and
+                     end_station_name is not null and
+                     end_station_id is not null and
+                     start_lat is not null and
+                     start_lng is not null and
+                     end_lat is not null and
+                     end_lng is not null and
+                     member_casual is not null
+                      )
+                    ### remove duplicate ride_id
+                      SELECT 
+                        *,
+                        COUNT (ride_id) as count
+                      FROM 
+                        trip_data
+                      GROUP BY
+                        rideable_type,
+                        started_at,
+                        ended_at,
+                        start_station_name,
+                        start_station_id,
+                        end_station_name,
+                        end_station_id,
+                        start_lat,
+                        start_lng,
+                        end_lat,
+                        end_lng,
+                        member_casual,
+                      ride_id having count(ride_id) =1 
+
+
+
+
+
+
+
