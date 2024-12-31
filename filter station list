@@ -1,0 +1,13 @@
+
+SELECT 
+  DISTINCT(TRIM (start_station_id)) as station_id,
+  start_station_name as station_name,
+  AVG(start_lat) as station_lat,
+  AVG (start_lng) as station_lng,
+  CONCAT(AVG(start_lat),", ", AVG(start_lng)) as location
+FROM `casestudy-000001.cyclistic_bikeshare.trips_clean_data`
+GROUP BY
+  station_id, 
+  start_station_name
+ORDER BY
+  station_id
