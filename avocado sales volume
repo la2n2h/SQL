@@ -1,0 +1,47 @@
+# check type of avocado
+SELECT
+ distint (type)
+FROM
+`deductive-wares-447204-s0.avocado.avocado_copy`
+
+# unify name of avocado type
+SELECT
+  *,
+CASE type
+  when 'conventional' then 'Conventional'
+  when 'Conventional' then 'Conventional'
+  when 'organic' then 'Organic'
+  when 'Organic' then 'Organic'
+  else "NA"
+  END as type_new
+FROM
+  `deductive-wares-447204-s0.avocado.avocado_copy`
+
+# sales volume of avocados organic by year
+SELECT 
+  year,
+  count (*) as number_avocados,
+  sum(TotalVolume) as total_avocados,
+  sum(AveragePrice) as total_ave_price
+FROM `deductive-wares-447204-s0.avocado.avocado_copy`
+WHERE
+  type like '_rganic'
+GROUP BY
+  year
+ORDER BY
+  year
+
+# sales volume of avocados conventional by year
+
+SELECT 
+  year,
+  count (*) as number_avocados,
+  sum(TotalVolume) as total_avocados,
+  sum(AveragePrice) as total_ave_price
+FROM `deductive-wares-447204-s0.avocado.avocado_copy`
+WHERE
+  type_new = 'Conventional'
+GROUP BY
+  year
+ORDER BY
+  year
