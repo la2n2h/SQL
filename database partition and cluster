@@ -1,0 +1,27 @@
+# database partition
+
+  CREATE TABLE
+`deductive-wares-447204-s0.avocado.avocado_partition`
+PARTITION BY
+ RANGE_BUCKET(year, generate_array(2015, 2022, 1))
+AS (
+  SELECT
+    *
+  FROM
+  `deductive-wares-447204-s0.avocado.avocado`
+);
+
+# database partion and cluster
+
+  CREATE TABLE 
+`deductive-wares-447204-s0.avocado. avocado_cluster`
+PARTITION BY
+  RANGE_BUCKET(year,generate_array(2015, 2022 , 1))
+CLUSTER BY
+  type
+AS (
+  SELECT
+    *
+  FROM
+    `deductive-wares-447204-s0.avocado.avocado`
+);
