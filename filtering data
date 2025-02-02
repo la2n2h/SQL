@@ -69,3 +69,7 @@ FROM
 Orders
 WHERE
 ProductID = 'P1' OR ProductID = 'P2' AND Quantity >2;
+
+# Print distinct Product id that have cost less than 250
+SELECT Distinct (ProductID) FROM Orders WHERE ProductID IN (SELECT ProductID FROM Orders WHERE Cost < 250);
+SELECT Distinct (ProductID) FROM Orders WHERE  Cost < 250;
