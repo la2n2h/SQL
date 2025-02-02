@@ -208,3 +208,4 @@ SELECT EmployeeID, HandlingCost FROM employee_orders WHERE HandlingCost > ALL (S
 |          5 |          300 |
 +------------+--------------+
 1 row in set (0.00 sec)
+
