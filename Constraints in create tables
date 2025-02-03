@@ -65,3 +65,28 @@ SHOW columns FROM Items;
 | ItemName | varchar(100) | NO   |     | NULL    |       |
 +----------+--------------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
+
+# create Staff table and their contract info
+CREATE TABLE Staff (StaffID INT NOT NULL PRIMARY KEY, PhoneNumber INT NOT NULL UNIQUE, FullName VARCHAR(100) NOT NULL);
+CREATE TABLE ContractInfo (ContractID INT NOT NULL PRIMARY KEY, StaffID INT NOT NULL, Salary DECIMAL(7,2) NOT NULL, Location VARCHAR(50) NOT NULL DEFAULT 'Texas', StaffType VARCHAR(20) NOT NULL CHECK (StaffType = 'Junior' OR StaffType = 'Senior'), FOREIGN KEY (StaffID) REFERENCES Staff(StaffID) ON DELETE CASCADE ON UPDATE CASCADE);
+mysql> SHOW columns FROM Staff;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| StaffID     | int          | NO   | PRI | NULL    |       |
+| PhoneNumber | int          | NO   | UNI | NULL    |       |
+| FullName    | varchar(100) | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SHOW columns FROM ContractInfo;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| ContractID | int          | NO   | PRI | NULL    |       |
+| StaffID    | int          | NO   | MUL | NULL    |       |
+| Salary     | decimal(7,2) | NO   |     | NULL    |       |
+| Location   | varchar(50)  | NO   |     | Texas   |       |
+| StaffType  | varchar(20)  | NO   |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
