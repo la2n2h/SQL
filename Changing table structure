@@ -1,4 +1,4 @@
-Mangata and Gallo is a jewelry store that specializes in special occasions like engagements, weddings and anniversaries. The jewelry company primarily operates online and has a small storefront in Austin, Texas with an atelier attached for browsing. The company has asked you to create a table in their database called 'Staff'. This table must contain the records of all staff members.
+# Mangata and Gallo is a jewelry store that specializes in special occasions like engagements, weddings and anniversaries. The jewelry company primarily operates online and has a small storefront in Austin, Texas with an atelier attached for browsing. The company has asked you to create a table in their database called 'Staff'. This table must contain the records of all staff members.
 CREATE DATABASE Mangata_Gallo_HR;
 USE Mangata_Gallo_HR;
 CREATE TABLE Staffs (StaffID INT, FullName VARCHAR(100), PhoneNumber VARCHAR(10));
@@ -44,3 +44,16 @@ SHOW columns FROM Staff;
 | Role     | varchar(50)  | NO   |     | NULL    |       |
 +----------+--------------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
+
+# Create new table from existing table
+CREATE TABLE StaffID SELECT StaffID FROM Staffs;
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW columns FROM StaffID;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| StaffID | int  | NO   |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+1 row in set (0.00 sec)
