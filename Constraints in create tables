@@ -1,0 +1,67 @@
+Mangata and Gallo is a jewelry store that specializes in special occasions like engagements, weddings and anniversaries. The jewelry company primarily operates online and has a small storefront in Austin, Texas with an atelier attached for browsing. The company approached you to create three tables for their database called 'Clients', 'Orders' and 'Items' respectively. Each database must have all necessary constraints applied as specified in each task.
+The 'Clients' table contains the Client ID, full name and phone number of each client.
+The Orders table contains information about each order's Order ID, Client ID, Item ID, Quantity and Cost.
+The Items table contains information about the Item ID, Item name, and Item price.
+
+# Create tables as request 
+CREATE DATABASE Magata_Gallo;
+USE Magata_Gallo;
+CREATE TABLE Clients ( ClientID INT NOT NULL PRIMARY KEY, ClientName VARCHAR(100) NOT NULL, PhoneNumber INT NOT NULL UNIQUE);
+CREATE TABLE Items (ItemID INT NOT NULL PRIMARY KEY, Price Decimal(6,2) NOT NULL);
+CREATE TABLE Orders (OrderID INT NOT NULL PRIMARY KEY, ClientID INT NOT NULL, ItemID INT NOT NULL, Quantity INT NOT NULL CHECK (Quantity <=3), Cost DECIMAL(6,2), FOREIGN KEY (ClientID) REFERENCES Clients(ClientID) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (ItemID) REFERENCES Items(ItemID) ON DELETE CASCADE ON UPDATE CASCADE);
+
+# Check tables
+mysql> SHOW tables;
++------------------------+
+| Tables_in_Magata_Gallo |
++------------------------+
+| Clients                |
+| Items                  |
+| Orders                 |
++------------------------+
+3 rows in set (0.00 sec)
+
+mysql> SHOW columns FROM Clients;
+ns FROM Items;
+SHOW columns FROM Orders;+-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| ClientID    | int          | NO   | PRI | NULL    |       |
+| ClientName  | varchar(100) | NO   |     | NULL    |       |
+| PhoneNumber | int          | NO   | UNI | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SHOW columns FROM Items;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| ItemID | int          | NO   | PRI | NULL    |       |
+| Price  | decimal(6,2) | NO   |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+Missing column name ItemName
+
+mysql> SHOW columns FROM Orders;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| OrderID  | int          | NO   | PRI | NULL    |       |
+| ClientID | int          | NO   | MUL | NULL    |       |
+| ItemID   | int          | NO   | MUL | NULL    |       |
+| Quantity | int          | NO   |     | NULL    |       |
+| Cost     | decimal(6,2) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+# insert columns name ItemName into Items table
+mysql> ALTER TABLE Items ADD COLUMN ItemName VARCHAR(100) NOT NULL;
+SHOW columns FROM Items;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| ItemID   | int          | NO   | PRI | NULL    |       |
+| Price    | decimal(6,2) | NO   |     | NULL    |       |
+| ItemName | varchar(100) | NO   |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
